@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import "./App.css";
+import Card from "./Components/Card";
 
 function App() {
   const [leftItems, setLeftItems] = useState(["item1", "item2", "item3"]);
@@ -27,9 +28,7 @@ function App() {
     }
     setLeftCheck([]);
     setLeftItems(newLeftItems);
-    // setLeftItems(findData);
   }
-
   function leftCheckHandler(e) {
     if (e.target.checked) {
       setLeftCheck([...leftCheck, e.target.value]);
@@ -45,38 +44,12 @@ function App() {
   return (
     <div className="App">
       <div className="App__container">
-        <div className="App__left_div">
-          {leftItems.map((item, id) => {
-            return (
-              <div key={item.id}>
-                <input
-                  type="checkbox"
-                  onChange={leftCheckHandler}
-                  value={item}
-                />
-                {item}
-              </div>
-            );
-          })}
-        </div>
+        <Card leftItems={leftItems} leftCheckHandler={leftCheckHandler} />
         <div className="buttonContainer">
           <button onClick={leftButtonHandler}>Left</button>
           <button onClick={rightButtonHandler}>Right</button>
         </div>
-        <div className="App__left_div">
-          {rightItems.map((item, id) => {
-            return (
-              <div key={item.id}>
-                <input
-                  type="checkbox"
-                  onChange={rightCheckHandler}
-                  value={item}
-                />
-                {item}
-              </div>
-            );
-          })}
-        </div>
+        <Card leftItems={rightItems} leftCheckHandler={rightCheckHandler} />
       </div>
     </div>
   );
